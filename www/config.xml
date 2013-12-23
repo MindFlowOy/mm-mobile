@@ -6,7 +6,7 @@
     version="0.0.1"
     xmlns="http://www.w3.org/ns/widgets">
     <name>
-        Mirroronkey
+        MirrorMonkey
     </name>
     <description>
         The MirrorMonkey Ionic Framework test app using Cordova and AngularJS.
@@ -24,5 +24,4 @@
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-installLocation" value="preferExternal" />
 </widget>
