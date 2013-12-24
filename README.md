@@ -51,8 +51,6 @@ ripple emulate --path platforms/android/assets/www
 or just
 ripple emulate
 
-
-
 cordova serve 4002 -> http://localhost:4002
 
 
@@ -90,9 +88,8 @@ phonegap remote logout
 
 ## local server
 python -m SimpleHTTPServer 3000
+using fake deviceready in fake phonegap.js for web browser -> http://127.0.0.1:3000/www/browser.html
 
 ## riple with phonegap
-http://emulate.phonegap.com/
-
-
-localhost:3000/www/
+ripple emulate
+http://emulate.phonegap.com/ ?
