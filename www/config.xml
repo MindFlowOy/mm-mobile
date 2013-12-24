@@ -19,6 +19,7 @@
     <gap:platform name="ios" />
     <gap:platform name="android" />
     <gap:splash src="splash.png" />
+    <gap:plugin name="org.apache.cordova.device" />
     <icon src="icon.png" />
     <preference name="phonegap-version" value="3.1.0" />
     <preference name="webviewbounce" value="false" />
