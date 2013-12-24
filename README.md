@@ -58,12 +58,13 @@ cordova serve 4002 -> http://localhost:4002
 
 ## phonegap
 sudo npm install -g phonegap
-phonegap create ui-phonegap com.mindflow.mirrormonkey MirrorMonkey
+phonegap create mm-ui com.mindflow.mirrormonkey MirrorMonkey
 cd ui-phonegap
+(
 phonegap plugin add org.apache.cordova.device
 phonegap plugin add org.apache.cordova.statusbar
 phonegap local plugin list
-
+)
 iOs:
     phonegap build ios
     phonegap install ios
