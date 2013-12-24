@@ -81,10 +81,10 @@ Android:
 
 
 ## remote
-phonegap remote login -u iamreallyadog@gmail.com -p mYpASSw0RD
+phonegap remote login -u vli@iki.fi -p ?
 phonegap local plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
 phonegap remote build ios
-phonegap remote install/run ios just generates QR <code></code>
+phonegap remote install/run ios just generates QR (is not working)
 phonegap remote logout
 
 
