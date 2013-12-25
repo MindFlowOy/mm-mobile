@@ -34,6 +34,9 @@ Android emulator:
     Check that processor type is "Intel Atom" and snapshot are enabled by
     android avd
 
+    Check devices:
+    adb devices
+
 Staring android emulator:
     emulator -avd NexusOne
     emulator -avd Nexus7

@@ -1,0 +1,18 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/Users/vli/.nvm/v0.10.22/bin/npm', 'link' ]
+2 info using npm@1.3.21
+3 info using node@v0.10.22
+4 verbose linkPkg /Users/vli/Code/GH
+5 error Error: ENOENT, open '/Users/vli/Code/GH/package.json'
+6 error If you need help, you may report this *entire* log,
+6 error including the npm and node versions, at:
+6 error     <http://github.com/isaacs/npm/issues>
+7 error System Darwin 13.0.0
+8 error command "node" "/Users/vli/.nvm/v0.10.22/bin/npm" "link"
+9 error cwd /Users/vli/Code/GH/mindflow/mm-mobile
+10 error node -v v0.10.22
+11 error npm -v 1.3.21
+12 error path /Users/vli/Code/GH/package.json
+13 error code ENOENT
+14 error errno 34
+15 verbose exit [ 34, true ]
