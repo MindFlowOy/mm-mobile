@@ -1,7 +1,7 @@
-#ionic-angular-cordova-seed
+# MirrorMonkey mobile test project
 ==========================
 
-## "preparations:"
+## preparations:
 
     npm install -g ripple-emulator http://www.raymondcamden.com/index.cfm/2013/11/5/Ripple-is-Reborn
 
@@ -10,7 +10,7 @@ xcode:
     xcode-select --install
 
 
-iOS emulatro:
+iOS emulator:
 
     sudo npm install ios-sim -g
     ios-sim showsdks
