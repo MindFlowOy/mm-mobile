@@ -54,5 +54,6 @@
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
     <gap:platform name="ios" />
     <gap:platform name="android" />
+    <gap:plugin name="org.apache.cordova.device" />
     <access origin="http://127.0.0.1*" />
 </widget>
