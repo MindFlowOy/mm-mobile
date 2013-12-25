@@ -31,29 +31,15 @@
             <h1>PhoneGap</h1>
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready !</p>
-                <p id="deviceProperties">Loading device properties...</p>
+                <p class="event received">Device is Ready Now -5 !</p>
+                <p id="deviceProperties">Loading device properties by plugin...</p>
             </div>
         </div>
         <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src=device.js"></script>
+        <script type="text/javascript" src="device.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" charset="utf-8">
-
-            // Wait for device API libraries to load
-            document.addEventListener("deviceready", onDeviceReadyProp, false);
-
-            // device APIs are available
-            function onDeviceReadyProp() {
-                var element = document.getElementById('deviceProperties');
-                element.innerHTML = 'Device Name: '     + device.name     + '<br />' +
-                                    'Device Cordova: '  + device.cordova  + '<br />' +
-                                    'Device Platform: ' + device.platform + '<br />' +
-                                    'Device UUID: '     + device.uuid     + '<br />' +
-                                    'Device Model: '    + device.model    + '<br />' +
-                                    'Device Version: '  + device.version  + '<br />';
-            }
-
-            </script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
     </body>
 </html>

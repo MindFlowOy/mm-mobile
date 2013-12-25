@@ -1,6 +1,18 @@
 # MirrorMonkey mobile test project
 ==========================
 
+## typical development steps:
+
+    changes ->
+    upgrade versions in confix.xml ->
+    phonegap run ios --emulator (shows often timeout-error, but works in emulator) ->
+    test changes ->
+    phonegap run android --emulator (wait..., wait ..., wait... and finally updates the emulator) ->
+    test changes ->
+    phonegap remote build ios
+    and
+    phonegap remote build android
+
 ## preparations:
 
     npm install -g ripple-emulator http://www.raymondcamden.com/index.cfm/2013/11/5/Ripple-is-Reborn
@@ -40,10 +52,10 @@ Android emulator:
     Check devices:
     adb devices
 
+
 Staring android emulator:
+
     emulator -avd NexusOne
-    emulator -avd Nexus7
-    emulator -avd OmaEmu3 (hidas)
 
 
 
@@ -76,8 +88,8 @@ Staring android emulator:
 
     phonegap remote login -u vli@iki.fi -p ?
     phonegap local plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
-    phonegap remote build ios
-    phonegap remote install/run ios just generates QR (is not working)
+    phonegap remote build ios|android
+    (phonegap remote install/run ios (just generates QR - is not working?)
     phonegap remote logout
 
 
@@ -102,9 +114,15 @@ Staring android emulator:
 
 AID C5D3M8PWHR
 
-https://developer.apple.com/account/overview.action
+Keys:
 
-Logging: adb -e logcat -v time WebCore:V browser:V *:S
+    iOs: https://developer.apple.com/account/overview.action
+
+    android: keytool -genkey -v -keystore [keystore_name].keystore -alias [alias_name] -keyalg RSA -keysize 2048 -validity 10000
+
+Logging?:
+
+        adb -e logcat -v time WebCore:V browser:V *:S
 
 
 ## cordova

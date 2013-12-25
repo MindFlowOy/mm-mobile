@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.mindflow.mirrormonkey" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.mindflow.mirrormonkey" version="0.0.6" versionCode="6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Hello Cordova</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -13,10 +13,10 @@
     </feature>
     <name>MirrorMonkey</name>
     <description>
-        MirrorMonkey 0.0.1
+        MirrorMonkey App
     </description>
     <author email="vesa@mindflow.fi" href="http://mindflowoy.github.io/">
-        PhoneGap Team
+        Vesa Lindfors
     </author>
     <content src="index.html" />
     <access origin="*" />

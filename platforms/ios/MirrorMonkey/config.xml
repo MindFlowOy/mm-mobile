@@ -1,11 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.mindflow.mirrormonkey" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.mindflow.mirrormonkey" version="0.0.5" versionCode="5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Hello Cordova</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
-    <access origin="*" />
-    <content src="index.html" />
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="DisallowOverscroll" value="false" />
@@ -26,11 +24,13 @@
     </feature>
     <name>MirrorMonkey</name>
     <description>
-        MirrorMonkey 0.0.1
+        MirrorMonkey App
     </description>
     <author email="vesa@mindflow.fi" href="http://mindflowoy.github.io/">
-        PhoneGap Team
+        Vesa Lindfors
     </author>
+    <content src="index.html" />
+    <access origin="*" />
     <feature name="http://api.phonegap.com/1.0/device" />
     <preference name="phonegap-version" value="3.1.0" />
     <preference name="permissions" value="none" />
@@ -48,7 +48,7 @@
     <preference name="show-splash-screen-spinner" value="true" />
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
-    <preference name="android-minSdkVersion" value="10" />
+    <preference name="android-minSdkVersion" value="8" />
     <preference name="android-installLocation" value="auto" />
     <icon src="icon.png" />
     <icon gap:density="ldpi" gap:platform="android" src="res/icon/android/icon-36-ldpi.png" />
@@ -77,5 +77,4 @@
     <gap:platform name="ios" />
     <gap:platform name="android" />
     <gap:plugin name="org.apache.cordova.device" />
-    <access origin="http://127.0.0.1*" />
 </widget>
