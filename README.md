@@ -23,7 +23,10 @@ Android emulator:
     brew install android-sdk
     .bashrc add: export ANDROID_HOME=/usr/local/opt/android-sdk
 
-    Select all tools: http://www.addthis.com/blog/2013/07/22/10-tips-for-android-emulator/#.UrhiAGQW0eU
+    Check all tools: http://www.addthis.com/blog/2013/07/22/10-tips-for-android-emulator/#.UrhiAGQW0eU
+    android list sdk
+    and install missing ones by
+    android update sdk --no-ui --filter 12
 
     Install hamaxand hotfix: http://software.intel.com/en-us/articles/intel-hardware-accelerated-execution-manager
     android avd

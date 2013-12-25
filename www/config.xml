@@ -10,7 +10,7 @@
         MirrorMonkey 0.0.1
     </description>
     <author email="vesa@mindflow.fi" href="http://mindflowoy.github.io/">
-        PhoneGap Team
+        Vesa Lindfors
     </author>
     <content src="index.html" />
     <access origin="*" />
