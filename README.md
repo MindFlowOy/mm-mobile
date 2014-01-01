@@ -3,12 +3,26 @@
 
 ## typical development steps:
 
-    changes ->
+ui changes ->
+
+    make loadui
+
+local changes ->
+
     upgrade versions in confix.xml ->
+
     phonegap run ios --emulator (shows often timeout-error, but works in emulator) ->
+
+    phonegap run ios --device
+
     test changes ->
+
     phonegap run android --emulator (wait..., wait ..., wait... and finally updates the emulator) ->
+
+    phonegap run android --device ->
+
     test changes ->
+
     phonegap remote build ios
     and
     phonegap remote build android

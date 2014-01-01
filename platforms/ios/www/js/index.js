@@ -30,11 +30,12 @@ var app = {
     },
     // deviceready Event Handler
     //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         // device APIs are available
-
+        mirrormonkey();
+        /*
+        // The scope of 'this' is the event. In order to call the 'receivedEvent'
+        // function, we must explicity call 'app.receivedEvent(...);'
         var element = document.getElementById('deviceProperties');
         element.innerHTML = 'Device Name: '     + device.name     + '<br />' +
                             'Device Cordova: '  + device.cordova  + '<br />' +
@@ -42,9 +43,8 @@ var app = {
                             'Device UUID: '     + device.uuid     + '<br />' +
                             'Device Model: '    + device.model    + '<br />' +
                             'Device Version: '  + device.version  + '<br />';
-
-        //console.log('Received Event: ' + id);
         app.receivedEvent('deviceready');
+        */
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {

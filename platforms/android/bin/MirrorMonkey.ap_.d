@@ -12,7 +12,8 @@
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/bin/res/drawable-mdpi/icon.png \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/bin/res/drawable-xhdpi/icon.png \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www \
-/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/browser.html \
+/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/build \
+/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/component.json \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/config.xml \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/cordova.js \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/cordova_plugins.js \
@@ -27,8 +28,16 @@
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/spec \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/spec.html \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/css/index.css \
+/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/css/ionic \
+/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/css/mm-ui.css \
+/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/css/ionic/fonts \
+/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/css/ionic/fonts/ionicons.eot \
+/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/css/ionic/fonts/ionicons.svg \
+/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/css/ionic/fonts/ionicons.ttf \
+/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/css/ionic/fonts/ionicons.woff \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/img/logo.png \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/js/index.js \
+/Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/js/mm-ui.js \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device/www \
 /Users/vli/Code/GH/mindflow/mm-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device/www/device.js \
