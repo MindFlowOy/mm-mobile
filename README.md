@@ -42,7 +42,9 @@ iOS emulator:
     ios-sim showsdks
     ios-sim launch ./
 
+iOS device installation requires
 
+    npm install -g ios-deploy
 
 Android emulator:
 
@@ -133,6 +135,10 @@ Keys:
     iOs: https://developer.apple.com/account/overview.action
 
     android: keytool -genkey -v -keystore [keystore_name].keystore -alias [alias_name] -keyalg RSA -keysize 2048 -validity 10000
+    for example: keytool -genkey -v -keystore mm.keystore -alias MirrorMonkey -keyalg RSA -keysize 2048 -validity 10000 (ssana:3...)
+
+    SDK may use some default android debug keystore like told in http://developer.android.com/tools/publishing/app-signing.html, but I didn't managed with that
+    keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -dname "CN=Android Debug,O=Android,C=US"
 
 Logging?:
 
