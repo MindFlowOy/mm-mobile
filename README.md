@@ -50,6 +50,8 @@ Android emulator:
 
     brew install android-sdk
     .bashrc add: export ANDROID_HOME=/usr/local/opt/android-sdk
+    
+    android update sdk -u
 
     Check all tools: http://www.addthis.com/blog/2013/07/22/10-tips-for-android-emulator/#.UrhiAGQW0eU
     android list sdk
