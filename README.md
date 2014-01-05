@@ -80,6 +80,10 @@ Staring android emulator:
     emulator -avd NexusOne
 
 
+Windows emulator:
+
+Follow instructions at http://girliemac.com/blog/2013/01/09/how-to-enable-wp8-emulator-on-mac/
+
 
 ## phonegap
 
