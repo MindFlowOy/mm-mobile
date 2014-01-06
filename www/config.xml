@@ -4,8 +4,8 @@
     xmlns:cdv = "http://cordova.apache.org/ns/1.0"
     xmlns:gap="http://phonegap.com/ns/1.0"
     id="com.mindflow.mirrormonkey"
-    versionCode = "8"
-    version="0.0.8">
+    versionCode = "9"
+    version="0.0.9">
     <name>MirrorMonkey</name>
     <description>
         MirrorMonkey App

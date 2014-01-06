@@ -49,12 +49,12 @@ iOS device installation requires
 Android emulator:
 
     brew install android-sdk
-    .bashrc add: 
+    .bashrc add:
     export ANDROID_HOME=/usr/local/opt/android-sdk
     export PATH=$PATH:$ANDROID_HOME/tools
     export PATH=$PATH:$ANDROID_HOME/platform-tools
     export PATH=$PATH:$ANDROID_HOME/build-tools
-    
+
     android update sdk -u
 
     Check all tools: http://www.addthis.com/blog/2013/07/22/10-tips-for-android-emulator/#.UrhiAGQW0eU

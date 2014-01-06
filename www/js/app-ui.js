@@ -584,6 +584,220 @@ function getScript(script) {
 }
 
 });
+require.register("common/index.js", function(exports, require, module){
+module.exports = require("./base");
+
+});
+require.register("common/base.js", function(exports, require, module){
+/*
+*
+*   Helpers
+*
+*/
+
+
+
+});
+require.register("summary/index.js", function(exports, require, module){
+var mmCtrls;
+
+mmCtrls = require("./ctrl");
+
+});
+require.register("summary/ctrl.js", function(exports, require, module){
+/*
+*
+*
+*
+*/
+
+var summaryCtrl;
+
+summaryCtrl = function($rootScope, $scope, $location, $log) {
+  var _this = this;
+  $log.info('Summary Ctrl loaded');
+  $scope.title = 'App';
+  $scope.leftButtons = [];
+  /*
+  [
+      type: 'button-positive'
+      content: "<i class='icon ion-navicon'></i>"
+      tap: (e)->
+          $log.log 'Nav'
+  ]
+  */
+
+  return $scope.rightButtons = [
+    {
+      type: 'button-clear',
+      content: "<i class='icon ion-plus'></i>",
+      tap: function(e) {
+        $log.log('Edit tap');
+        return $location.path("/list");
+      }
+    }
+  ];
+};
+
+/*
+*
+* Expose 'SummaryCtrl'
+*
+*/
+
+
+module.exports = angular.module('appCtrls').controller('SummaryCtrl', ['$rootScope', '$scope', '$location', '$log', summaryCtrl]);
+
+});
+require.register("zones/index.js", function(exports, require, module){
+var mmCtrls;
+
+mmCtrls = require("./ctrl");
+
+});
+require.register("zones/ctrl.js", function(exports, require, module){
+var common, detailCtrl, listCtrl, mmSrvs;
+
+common = require("common");
+
+mmSrvs = require("./srv");
+
+/*
+*
+*
+*
+*/
+
+
+listCtrl = function($rootScope, $scope, $log, ListSrv) {
+  $scope.title = 'Zones';
+  $scope.zones = ListSrv.all();
+  return $log.info('Zones List Ctrl loaded ', $scope.zones);
+};
+
+/*
+*
+*
+*
+*/
+
+
+detailCtrl = function($rootScope, $scope, $log, $routeParams, ListSrv) {
+  $scope.zone = ListSrv.get($routeParams.zoneId);
+  $scope.title = $scope.zone.title;
+  return $log.info('Zones  Ctrl loaded');
+};
+
+/*
+*
+* Expose 'ListCtrl' and DetailCtrl
+*
+*/
+
+
+module.exports = angular.module('appCtrls', ['appSrvs']).controller('ListCtrl', ['$rootScope', '$scope', '$log', 'ListSrv', listCtrl]).controller('DetailCtrl', ['$rootScope', '$scope', '$log', '$routeParams', 'ListSrv', detailCtrl]);
+
+});
+require.register("zones/srv.js", function(exports, require, module){
+var common, listSrv;
+
+common = require("common");
+
+/*
+*
+*
+*
+*/
+
+
+listSrv = function($rootScope, $log) {
+  var zones;
+  $log.info('QuestionSrv  loaded');
+  zones = [
+    {
+      id: 0,
+      title: 'Food',
+      description: 'Enter shortly after all eatings.',
+      icon: 'ion-pizza',
+      questions: [
+        {
+          txt: 'Did you eat food?',
+          kind: 'boolean'
+        }, {
+          txt: 'Was it mostly plants?',
+          kind: 'boolean'
+        }, {
+          txt: 'Was it not too much?',
+          kind: 'boolean'
+        }
+      ]
+    }, {
+      id: 1,
+      title: 'Exercise',
+      description: 'Enter after all kind of phyisicall activities.',
+      icon: 'ion-android-stopwatch',
+      questions: [
+        {
+          txt: 'Did you take exercise?',
+          kind: 'boolean'
+        }, {
+          txt: 'Was it more than 10min?',
+          kind: 'boolean'
+        }, {
+          txt: 'Did you get winded',
+          kind: 'boolean'
+        }
+      ]
+    }, {
+      id: 2,
+      title: 'Emotional',
+      description: 'Enter after any kind of emotional well-being like sleeping, theather..',
+      icon: 'ion-heart',
+      questions: [
+        {
+          txt: 'Did you take relaxing activity?',
+          kind: 'boolean'
+        }, {
+          txt: 'Was it more than 10min?',
+          kind: 'boolean'
+        }, {
+          txt: 'Was it enjoyable?',
+          kind: 'boolean'
+        }
+      ]
+    }
+  ];
+  return {
+    all: function() {
+      return zones;
+    },
+    get: function(zoneId) {
+      return zones[zoneId];
+    }
+  };
+};
+
+/*
+*
+* Expose 'ListSrv'
+*
+*/
+
+
+module.exports = angular.module('appSrvs', []).factory('ListSrv', ['$rootScope', '$log', listSrv]);
+
+});
+require.register("ionic/index.js", function(exports, require, module){
+require("./js/ionic.js");
+require("./js/angular/angular.js");
+require("./js/angular/angular-animate.js");
+require("./js/angular/angular-route.js");
+require("./js/angular/angular-sanitize.js");
+require("./js/angular/angular-touch.js");
+require("./js/angular/angular-resource.js");
+require("./js/ionic-angular.js");
+
+});
 require.register("ionic/js/ionic.js", function(exports, require, module){
 /*!
  * Copyright 2013 Drifty Co.
@@ -6955,7 +7169,6 @@ ionic.controllers.TabBarController = ionic.controllers.ViewController.inherit({
 })(window.ionic);
 
 });
-require.main("ionic", "js/ionic.js")
 require.register("ionic/js/angular/angular.js", function(exports, require, module){
 /**
  * @license AngularJS v1.2.6
@@ -31605,6 +31818,11 @@ angular.module('ionic.service', [
   'ionic.service.templateLoad'
 ]);
 
+// UI specific services and delegates
+angular.module('ionic.ui.service', [
+  'ionic.ui.service.scrollDelegate',
+]);
+
 angular.module('ionic.ui', [
                             'ionic.ui.content',
                             'ionic.ui.scroll',
@@ -31619,16 +31837,82 @@ angular.module('ionic.ui', [
                             'ionic.ui.radio'
                            ]);
 
+
 angular.module('ionic', [
     'ionic.service',
+    'ionic.ui.service',
     'ionic.ui',
-    
+
     // Angular deps
     'ngAnimate',
     'ngRoute',
     'ngTouch',
     'ngSanitize'
 ]);
+;
+(function() {
+'use strict';
+
+angular.module('ionic.ui.service.scrollDelegate', [])
+
+.factory('ScrollDelegate', ['$rootScope', function($rootScope) {
+  return {
+    /**
+     * Trigger a scroll-to-top event on child scrollers.
+     */
+    scrollTop: function(animate) {
+      $rootScope.$broadcast('scroll.scrollTop', animate);
+    },
+    tapScrollToTop: function(element) {
+      var _this = this;
+
+      ionic.on('tap', function(e) {
+        var el = element[0];
+        var bounds = el.getBoundingClientRect();
+
+        if(ionic.DomUtil.rectContains(e.gesture.touches[0].pageX, e.gesture.touches[0].pageY, bounds.left, bounds.top, bounds.left + bounds.width, bounds.top + 20)) {
+          _this.scrollTop();
+        }
+      }, element[0]);
+    },
+    /**
+     * Register a scope for scroll event handling.
+     * $scope {Scope} the scope to register and listen for events
+     */
+    register: function($scope, $element) {
+      $element.bind('scroll', function(e) {
+        $scope.onScroll({
+          event: e,
+          scrollTop: e.detail ? e.detail.scrollTop : e.originalEvent ? e.originalEvent.detail.scrollTop : 0,
+          scrollLeft: e.detail ? e.detail.scrollLeft: e.originalEvent ? e.originalEvent.detail.scrollLeft : 0
+        });
+      });
+
+      $scope.$parent.$on('scroll.resize', function(e) {
+        // Run the resize after this digest
+        $timeout(function() {
+          $scope.$parent.scrollView && $scope.$parent.scrollView.resize();
+        });
+      });
+
+      // Called to stop refreshing on the scroll view
+      $scope.$parent.$on('scroll.refreshComplete', function(e) {
+        $scope.$parent.scrollView && $scope.$parent.scrollView.finishPullToRefresh();
+      });
+
+      /**
+       * Called to scroll to the top of the content
+       *
+       * @param animate {boolean} whether to animate or just snap
+       */
+      $scope.$parent.$on('scroll.scrollTop', function(e, animate) {
+        $scope.$parent.scrollView && $scope.$parent.scrollView.scrollTo(0, 0, animate === false ? false : true);
+      });
+    }
+  };
+}]);
+
+})(ionic);
 ;
 angular.module('ionic.service.actionSheet', ['ionic.service.templateLoad', 'ionic.ui.actionSheet', 'ngAnimate'])
 
@@ -31639,7 +31923,7 @@ angular.module('ionic.service.actionSheet', ['ionic.service.templateLoad', 'ioni
     /**
      * Load an action sheet with the given template string.
      *
-     * A new isolated scope will be created for the 
+     * A new isolated scope will be created for the
      * action sheet and the new element will be appended into the body.
      *
      * @param {object} opts the options for this ActionSheet (see docs)
@@ -31662,7 +31946,7 @@ angular.module('ionic.service.actionSheet', ['ionic.service.templateLoad', 'ioni
             opts.cancel();
           }
         });
-        
+
         $animate.removeClass(element, 'active', function() {
           scope.$destroy();
         });
@@ -31723,7 +32007,7 @@ angular.module('ionic.service.loading', ['ionic.ui.loading'])
     /**
      * Load an action sheet with the given template string.
      *
-     * A new isolated scope will be created for the 
+     * A new isolated scope will be created for the
      * action sheet and the new element will be appended into the body.
      *
      * @param {object} opts the options for this ActionSheet (see docs)
@@ -31834,7 +32118,7 @@ angular.module('ionic.service.modal', ['ionic.service.templateLoad', 'ngAnimate'
     /**
      * Load a modal with the given template string.
      *
-     * A new isolated scope will be created for the 
+     * A new isolated scope will be created for the
      * modal and the new element will be appended into the body.
      */
     fromTemplate: function(templateString, options) {
@@ -32081,8 +32365,17 @@ angular.module('ionic.ui.actionSheet', [])
 
 angular.module('ionic.ui.header', ['ngAnimate'])
 
+.directive('barHeader', ['ScrollDelegate', function(ScrollDelegate) {
+  return {
+    restrict: 'C',
+    link: function($scope, $element, $attr) {
+      // We want to scroll to top when the top of this element is clicked
+      ScrollDelegate.tapScrollToTop($element);
+    }
+  };
+}])
 
-.directive('headerBar', function() {
+.directive('headerBar', [function(ScrollDelegate) {
   return {
     restrict: 'E',
     replace: true,
@@ -32134,7 +32427,7 @@ angular.module('ionic.ui.header', ['ngAnimate'])
       });
     }
   };
-})
+}])
 
 .directive('footerBar', function() {
   return {
@@ -32207,7 +32500,7 @@ angular.module('ionic.ui.checkbox', [])
 (function() {
 'use strict';
 
-angular.module('ionic.ui.content', [])
+angular.module('ionic.ui.content', ['ionic.ui.service'])
 
 /**
  * Panel is a simple 100% width and height, fixed panel. It's meant for content to be
@@ -32224,7 +32517,7 @@ angular.module('ionic.ui.content', [])
 
 // The content directive is a core scrollable content area
 // that is part of many View hierarchies
-.directive('content', ['$parse', '$timeout', function($parse, $timeout) {
+.directive('content', ['$parse', '$timeout', 'ScrollDelegate', function($parse, $timeout, ScrollDelegate) {
   return {
     restrict: 'E',
     replace: true,
@@ -32320,29 +32613,13 @@ angular.module('ionic.ui.content', [])
               });
             }
 
-            $element.bind('scroll', function(e) {
-              $scope.onScroll({
-                event: e,
-                scrollTop: e.detail ? e.detail.scrollTop : e.originalEvent ? e.originalEvent.detail.scrollTop : 0,
-                scrollLeft: e.detail ? e.detail.scrollLeft: e.originalEvent ? e.originalEvent.detail.scrollLeft : 0
-              });
-            });
+            // Register for scroll delegate event handling
+            ScrollDelegate.register($scope, $element);
 
-            $scope.$parent.$on('scroll.resize', function(e) {
-              // Run the resize after this digest
-              $timeout(function() {
-                sv && sv.resize();
-              });
-            });
 
-            $scope.$parent.$on('scroll.refreshComplete', function(e) {
-              sv && sv.finishPullToRefresh();
-            });
-            
-            // Let child scopes access this 
+            // Let child scopes access this
             $scope.$parent.scrollView = sv;
           });
-
 
 
         }
@@ -32418,7 +32695,7 @@ angular.module('ionic.ui.list', ['ngAnimate'])
 
     link: function($scope, $element, $attr, list) {
       if(!list) return;
-      
+
       var $parentScope = list.scope;
       var $parentAttrs = list.attrs;
 
@@ -32429,7 +32706,7 @@ angular.module('ionic.ui.list', ['ngAnimate'])
       // Set this item's class, first from the item directive attr, and then the list attr if item not set
       $scope.itemClass = $scope.itemType || $parentScope.itemType;
 
-      // Decide if this item can do stuff, and follow a certain priority 
+      // Decide if this item can do stuff, and follow a certain priority
       // depending on where the value comes from
       if(($attr.canDelete ? $scope.canDelete : $parentScope.canDelete) !== "false") {
         if($attr.onDelete || $parentAttrs.onDelete) {
@@ -32492,10 +32769,10 @@ angular.module('ionic.ui.list', ['ngAnimate'])
 
     template: '<div class="list" ng-class="{\'list-editing\': showDelete, \'list-reordering\': showReorder}" ng-transclude></div>',
 
-    controller: function($scope, $attrs) {
+    controller: ['$scope', '$attrs', function($scope, $attrs) {
       this.scope = $scope;
       this.attrs = $attrs;
-    },
+    }],
 
     link: function($scope, $element, $attr) {
       $scope.listView = new ionic.views.ListView({
@@ -32542,7 +32819,7 @@ angular.module('ionic.ui.loading', [])
     link: function($scope, $element){
       $element.addClass($scope.animation || '');
     },
-    template: '<div class="loading-backdrop" ng-class="{enabled: showBackdrop}">' + 
+    template: '<div class="loading-backdrop" ng-class="{enabled: showBackdrop}">' +
                 '<div class="loading" ng-transclude>' +
                 '</div>' +
               '</div>'
@@ -32556,7 +32833,7 @@ angular.module('ionic.ui.loading', [])
 
 /**
  * @description
- * The NavController is a navigation stack View Controller modelled off of 
+ * The NavController is a navigation stack View Controller modelled off of
  * UINavigationController from Cocoa Touch. With the Nav Controller, you can
  * "push" new "pages" on to the navigation stack, and then pop them off to go
  * back. The NavController controls a navigation bar with a back button and title
@@ -32650,7 +32927,7 @@ angular.module('ionic.ui.navRouter', ['ionic.service.gesture'])
         if(isFirst && $location.path() !== '/') {
           isFirst = false;
         }
-      });  
+      });
 
       $scope.$on('navRouter.goBack', function(e) {
         ctrl.goBack();
@@ -32677,7 +32954,7 @@ angular.module('ionic.ui.navRouter', ['ionic.service.gesture'])
             //forward button
             $rootScope.stackCursorPosition++;
           }
-           
+
           $scope.direction = 'forwards';
 
         } else {
@@ -32745,14 +33022,14 @@ angular.module('ionic.ui.navRouter', ['ionic.service.gesture'])
       backButtonIcon: '@',
       alignTitle: '@'
     },
-    template: '<header class="bar bar-header nav-bar" ng-class="{invisible: !navController.navBar.isVisible}">' + 
+    template: '<header class="bar bar-header nav-bar" ng-class="{invisible: !navController.navBar.isVisible}">' +
         '<div class="buttons"> ' +
           '<button nav-back class="button" ng-if="enableBackButton && showBackButton" ng-class="backButtonClass" ng-bind-html="backButtonLabel"></button>' +
-          '<button ng-click="button.tap($event)" ng-repeat="button in leftButtons" class="button no-animation {{button.type}}" ng-bind-html="button.content"></button>' + 
+          '<button ng-click="button.tap($event)" ng-repeat="button in leftButtons" class="button no-animation {{button.type}}" ng-bind-html="button.content"></button>' +
         '</div>' +
-        '<h1 class="title" ng-bind="currentTitle"></h1>' + 
+        '<h1 class="title" ng-bind="currentTitle"></h1>' +
         '<div class="buttons" ng-if="rightButtons.length"> ' +
-          '<button ng-click="button.tap($event)" ng-repeat="button in rightButtons" class="button no-animation {{button.type}}" ng-bind-html="button.content"></button>' + 
+          '<button ng-click="button.tap($event)" ng-repeat="button in rightButtons" class="button no-animation {{button.type}}" ng-bind-html="button.content"></button>' +
         '</div>' +
       '</header>',
     link: function($scope, $element, $attr, navCtrl) {
@@ -32910,7 +33187,7 @@ angular.module('ionic.ui.navRouter', ['ionic.service.gesture'])
       // Whether we should animate on tab change, also impacts whether we
       // tell any parent nav controller to animate
       $scope.animate = $scope.$eval($scope.animate);
-        
+
 
       // watch for changes in the left buttons
       $scope.$watch('leftButtons', function(value) {
@@ -33090,7 +33367,7 @@ angular.module('ionic.ui.radio', [])
           $element.addClass('active');
         }
       });
-        
+
       ionic.on('tap', clickHandler, $element[0]);
 
       $scope.$on('$destroy', function() {
@@ -33202,8 +33479,8 @@ angular.module('ionic.ui.scroll', [])
           $scope.$parent.$on('scroll.refreshComplete', function(e) {
             sv && sv.finishPullToRefresh();
           });
-          
-          // Let child scopes access this 
+
+          // Let child scopes access this
           $scope.$parent.scrollView = sv;
         });
       };
@@ -33289,7 +33566,7 @@ angular.module('ionic.ui.sideMenu', ['ionic.service.gesture'])
 
         var dragFn = function(e) {
           if($scope.dragContent) {
-            if(defaultPrevented) {
+            if(defaultPrevented || e.gesture.srcEvent.defaultPrevented) {
               return;
             }
             isDragging = true;
@@ -33400,16 +33677,14 @@ angular.module('ionic.ui.sideMenu', ['ionic.service.gesture'])
 
 /**
  * @description
- * The sideMenuCtrl lets you quickly have a draggable side
- * left and/or right menu, which a center content area.
+ * The slideBoxCtrol lets you quickly create a multi-page
+ * container where each page can be swiped or dragged between
  */
 
 angular.module('ionic.ui.slideBox', [])
 
 /**
- * The internal controller for the side menu controller. This
- * extends our core Ionic side menu controller and exposes
- * some side menu stuff on the current scope.
+ * The internal controller for the slide box controller.
  */
 
 .directive('slideBox', ['$timeout', '$compile', function($timeout, $compile) {
@@ -33419,15 +33694,22 @@ angular.module('ionic.ui.slideBox', [])
     transclude: true,
     scope: {
       doesContinue: '@',
+      slideInterval: '@',
       showPager: '@',
+      disableScroll: '@',
       onSlideChanged: '&'
     },
     controller: ['$scope', '$element', function($scope, $element) {
       var _this = this;
 
+      var continuous = $scope.$eval($scope.doesContinue) === true;
+      var slideInterval = continuous ? $scope.$eval($scope.slideInterval) || 4000 : 0;
+
       var slider = new ionic.views.Slider({
         el: $element[0],
-        continuous: $scope.$eval($scope.doesContinue) === true,
+        auto: slideInterval,
+        disableScroll: ($scope.$eval($scope.disableScroll) === true) || false,
+        continuous: continuous,
         slidesChanged: function() {
           $scope.currentSlide = slider.getPos();
 
@@ -33456,7 +33738,11 @@ angular.module('ionic.ui.slideBox', [])
         slider.slide(index);
       });
 
-      $scope.slideBox = slider;
+      $scope.$parent.slideBox = slider;
+
+      this.getNumSlides = function() {
+        return slider.getNumSlides();
+      };
 
       $timeout(function() {
         slider.load();
@@ -33482,14 +33768,11 @@ angular.module('ionic.ui.slideBox', [])
 .directive('slide', function() {
   return {
     restrict: 'E',
-    replace: true,
     require: '^slideBox',
-    transclude: true,
-    template: '<div class="slider-slide" ng-transclude></div>',
-    compile: function(element, attr, transclude) {
-      return function($scope, $element, $attr, slideBoxCtrl) {
-      };
-    }
+    compile: function(element, attr) {
+      element.addClass('slider-slide');
+      return function($scope, $element, $attr) {};
+    },
   };
 })
 
@@ -33513,11 +33796,10 @@ angular.module('ionic.ui.slideBox', [])
       };
 
       $scope.numSlides = function() {
-        return new Array($scope.slideBox.getNumSlides());
+        return new Array(slideBox.getNumSlides());
       };
 
       $scope.$watch('currentSlide', function(v) {
-        console.log('Current slide', v);
         selectPage(v);
       });
     }
@@ -33663,7 +33945,7 @@ angular.module('ionic.ui.tabs', ['ngAnimate'])
         });
 
         tabsCtrl.add($scope);
-        
+
         $scope.$watch('isVisible', function(value) {
           if(childElement) {
             $animate.leave(childElement);
@@ -33713,8 +33995,8 @@ angular.module('ionic.ui.tabs', ['ngAnimate'])
     transclude: true,
     replace: true,
     scope: true,
-    template: '<div class="tabs">' + 
-      '<tab-controller-item title="{{controller.title}}" icon="{{controller.icon}}" icon-on="{{controller.iconOn}}" icon-off="{{controller.iconOff}}" active="controller.isVisible" index="$index" ng-repeat="controller in controllers"></tab-controller-item>' + 
+    template: '<div class="tabs">' +
+      '<tab-controller-item title="{{controller.title}}" icon="{{controller.icon}}" icon-on="{{controller.iconOn}}" icon-off="{{controller.iconOff}}" active="controller.isVisible" index="$index" ng-repeat="controller in controllers"></tab-controller-item>' +
     '</div>',
     link: function($scope, $element, $attr, tabsCtrl) {
       $element.addClass($scope.tabsType);
@@ -33745,7 +34027,7 @@ angular.module('ionic.ui.tabs', ['ngAnimate'])
         tabsCtrl.select(scope.index);
       };
     },
-    template: 
+    template:
       '<a ng-class="{active:active}" ng-click="selectTab()" class="tab-item">' +
         '<i class="{{icon}}" ng-if="icon"></i>' +
         '<i class="{{iconOn}}" ng-if="active"></i>' +
@@ -33759,7 +34041,7 @@ angular.module('ionic.ui.tabs', ['ngAnimate'])
     restrict: 'E',
     replace: true,
     transclude: true,
-    template: '<div class="tabs tabs-primary" ng-transclude>' + 
+    template: '<div class="tabs tabs-primary" ng-transclude>' +
     '</div>'
   };
 });
@@ -33790,7 +34072,7 @@ angular.module('ionic.ui.toggle', [])
 
       if(!checkbox.length || !handle.length) { return; }
 
-      $scope.toggle = new ionic.views.Toggle({ 
+      $scope.toggle = new ionic.views.Toggle({
         el: $element[0],
         checkbox: checkbox[0],
         handle: handle[0]
@@ -34163,83 +34445,82 @@ angular.module('ionic.ui.virtualRepeat', [])
 })(ionic);
 
 });
-require.register("boot/app.js", function(exports, require, module){
+require.register("boot/template-summary.js", function(exports, require, module){
 module.exports = function anonymous(locals) {
 var buf = [];
-buf.push("<nav-page id=\"app-page\"><tabs tabs-style=\"tabs-icon-top\" tabs-type=\"tabs-positive\" animate-nav=\"false\"><tab title=\"Questions\" icon=\"icon ion-home\" ng-controller=\"QuestionListCtrl\"><content has-header=\"true\" has-tabs=\"true\"><list><item ng-repeat=\"q in questions\" type=\"item-text-wrap\" href=\"#/question/{{q.id}}\"><h3>{{q.title}}</h3><p>{{q.description}}</p></item></list></content></tab><tab title=\"Adopt\" icon=\"icon ion-heart\"><content has-header=\"true\" has-tabs=\"true\"><div class=\"padding\"><h2>Answer a question today.</h2></div><div class=\"list list-inset\"><label class=\"item item-input\"><span class=\"input-label\">Your name</span><input type=\"text\"/></label><label class=\"item item-input\"><span class=\"input-label\">Your email</span><input type=\"password\"/></label><label class=\"item item-input\"><textarea placeholder=\"Any more info?\"></textarea></label><button class=\"button button-positive button-block\">Send</button></div></content></tab><tab title=\"About\" icon=\"icon ion-search\"><content has-header=\"true\" has-tabs=\"true\" padding=\"true\"><h3>About this app</h3><p>This is a sample seed project for the Ionic Framework. Please change it to match your needs.</p></content></tab></tabs></nav-page>");;return buf.join("");
+buf.push("<nav-page title=\"title\" left-buttons=\"leftButtons\" right-buttons=\"rightButtons\"><content has-header=\"true\" padding=\"true\"><div class=\"padding\"><h2>Summary</h2></div></content></nav-page>");;return buf.join("");
 }
 });
-require.register("boot/question.js", function(exports, require, module){
+require.register("boot/template-list.js", function(exports, require, module){
 module.exports = function anonymous(locals) {
 var buf = [];
-buf.push("<nav-page title=\"question.title\"><content has-header=\"true\" padding=\"true\">{{ question.description }}</content></nav-page>");;return buf.join("");
+buf.push("<nav-page title=\"title\"><content has-header=\"true\" has-tabs=\"true\"><list><a ng-repeat=\"z in zones\" type=\"item-text-wrap\" href=\"#/detail/{{z.id}}\" class=\"item item-icon left\"><i data-ng-class=\"z.icon\" class=\"icon\"></i>{{z.title}}<span class=\"item-note\">{{z.description}}</span></a></list></content></nav-page>");;return buf.join("");
+}
+});
+require.register("boot/template-detail.js", function(exports, require, module){
+module.exports = function anonymous(locals) {
+var buf = [];
+buf.push("<nav-page title=\"zone.title\"><content has-header=\"true\"><div class=\"padding\"><h2>{{ zone.title }}</h2><p>{{ zone.description }}</p></div><ul class=\"list\"><li ng-repeat=\"q in zone.questions\" class=\"item item-checkbox\"><label class=\"checkbox\"><input type=\"checkbox\"/></label>{{q.txt}}</li></ul><div class=\"padding\"><label class=\"item item-input\"><textarea placeholder=\"Any more info?\"></textarea></label></div><button class=\"button button-positive button-block\">Send</button></content></nav-page>");;return buf.join("");
 }
 });
 require.register("boot/index.js", function(exports, require, module){
-var mm, mmCtrls, mmSrvs, _angular, _animate, _appTemplate, _ionic, _ionicAngular, _questionTemplate, _router, _sanitize, _touch;
+var app;
 
-_ionic = require("ionic/js/ionic.js");
+require("ionic");
 
-_angular = require("ionic/js/angular/angular.js");
+require("zones");
 
-_router = require("ionic/js/angular/angular-route.js");
-
-_animate = require("ionic/js/angular/angular-animate.js");
-
-_sanitize = require("ionic/js/angular/angular-sanitize.js");
-
-_touch = require("ionic/js/angular/angular-touch.js");
-
-_ionicAngular = require("ionic/js/ionic-angular.js");
-
-_appTemplate = require("./app")();
-
-_questionTemplate = require("./question")();
+require("summary");
 
 /*
 *
-*
+* Main app
 *
 */
 
 
-mm = angular.module('mm', ['ionic', 'ngRoute', 'ngAnimate', 'mmSrvs', 'mmCtrls']);
+app = angular.module('app', ['ionic', 'ngRoute', 'ngAnimate', 'appSrvs', 'appCtrls']);
 
 /*
 *
-*
+* App config
 *
 */
 
 
-mm.config([
+app.config([
   '$compileProvider', '$routeProvider', '$locationProvider', function($compileProvider, $routeProvider, $locationProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-    $routeProvider.when('/home', {
-      templateUrl: '/app.tpl.html',
-      controller: 'AppCtrl'
+    $routeProvider.when('/summary', {
+      templateUrl: '/template-summary.tpl.html',
+      controller: 'SummaryCtrl'
     });
-    $routeProvider.when('/question/:questionId', {
-      templateUrl: '/question.tpl.html',
-      controller: 'QuestionCtrl'
+    $routeProvider.when('/list', {
+      templateUrl: '/template-list.tpl.html',
+      controller: 'ListCtrl'
+    });
+    $routeProvider.when('/detail/:zoneId', {
+      templateUrl: '/template-detail.tpl.html',
+      controller: 'DetailCtrl'
     });
     return $routeProvider.otherwise({
-      redirectTo: '/home'
+      redirectTo: '/summary'
     });
   }
 ]);
 
 /*
 *
-*
+* App templates, routes and soem helpers
 *
 */
 
 
-mm.run([
+app.run([
   '$window', '$document', '$rootScope', '$log', '$q', '$location', '$templateCache', function($window, $document, $rootScope, $log, $q, $location, $templateCache) {
-    $templateCache.put('/app.tpl.html', _appTemplate);
-    $templateCache.put('/question.tpl.html', _questionTemplate);
+    $templateCache.put('/template-summary.tpl.html', require("./template-summary")());
+    $templateCache.put('/template-list.tpl.html', require("./template-list")());
+    $templateCache.put('/template-detail.tpl.html', require("./template-detail")());
     $rootScope.$on('$routeChangeStart', function(newRoute, oldRoute) {
       return $log.info('$routeChangeStart');
     });
@@ -34291,118 +34572,8 @@ mm.run([
   }
 ]);
 
-/*
-*
-*
-*
-*/
-
-
-mmSrvs = angular.module('mmSrvs', []);
-
-/*
-*
-*
-*
-*/
-
-
-mmSrvs.factory('QuestionSrv', [
-  '$rootScope', '$log', function($rootScope, $log) {
-    var questions;
-    $log.info('QuestionSrv  loaded');
-    questions = [
-      {
-        id: 0,
-        title: 'Cats',
-        description: 'Furry little creatures. Obsessed with plotting assassination, but never following through on it.'
-      }, {
-        id: 1,
-        title: 'Dogs',
-        description: 'Lovable. Loyal almost to a fault. Smarter than they let on.'
-      }, {
-        id: 2,
-        title: 'Turtles',
-        description: 'Everyone likes turtles.'
-      }, {
-        id: 3,
-        title: 'Sharks',
-        description: 'An advanced pet. Needs millions of gallons of salt water. Will happily eat you.'
-      }
-    ];
-    return {
-      all: function() {
-        return questions;
-      },
-      get: function(questionId) {
-        return questions[questionId];
-      }
-    };
-  }
-]);
-
-/*
-*
-*
-*
-*/
-
-
-mmCtrls = angular.module('mmCtrls', ['mmSrvs']);
-
-/*
-*
-*
-*
-*/
-
-
-mmCtrls.controller('AppCtrl', [
-  '$rootScope', '$scope', '$log', function($rootScope, $scope, $log) {
-    $log.info('App Ctrl loaded');
-    return $scope.init = function() {
-      $log.log('App Ctrl init');
-      return false;
-    };
-  }
-]);
-
-/*
-*
-*
-*
-*/
-
-
-mmCtrls.controller('QuestionListCtrl', [
-  '$rootScope', '$scope', '$log', 'QuestionSrv', function($rootScope, $scope, $log, QuestionSrv) {
-    $log.info('Question List Ctrl loaded');
-    $scope.questions = QuestionSrv.all();
-    $scope.$on('tab.shown', function() {
-      return console.log('tab show');
-    });
-    return $scope.$on('tab.hidden', function() {
-      return console.log('tab hide');
-    });
-  }
-]);
-
-/*
-*
-*
-*
-*/
-
-
-mmCtrls.controller('QuestionCtrl', [
-  '$rootScope', '$scope', '$log', '$routeParams', 'QuestionSrv', function($rootScope, $scope, $log, $routeParams, QuestionSrv) {
-    $log.info('Question  Ctrl loaded');
-    return $scope.question = QuestionSrv.get($routeParams.questionId);
-  }
-]);
-
 });
-require.register("mm-ui/jade-runtime.js", function(exports, require, module){
+require.register("app-ui/jade-runtime.js", function(exports, require, module){
 
 jade = (function(exports){
 /*!
@@ -34583,7 +34754,7 @@ exports.rethrow = function rethrow(err, filename, lineno){
 
 })({});
 });
-require.register("mm-ui/index.js", function(exports, require, module){
+require.register("app-ui/index.js", function(exports, require, module){
 module.exports = function() {
   var boot;
   return boot = require("boot");
@@ -34596,17 +34767,24 @@ module.exports = function() {
 
 
 
-require.register("boot/app.jade", function(exports, require, module){
-module.exports = 'nav-page#app-page\n  //-\n      Create tabs with an icon and text label, using the tabs-positive style (blue by default),\n      and disabling header title animation when switching tabs.\n\n  tabs(tabs-style=\'tabs-icon-top\', tabs-type=\'tabs-positive\', animate-nav=\'false\')\n    //-\n       Questions tab\n    tab(title=\'Questions\', icon=\'icon ion-home\', ng-controller=\'QuestionListCtrl\')\n      content(has-header=\'true\', has-tabs=\'true\')\n        list\n          item(ng-repeat=\'q in questions\', type=\'item-text-wrap\', href=\'#/question/{{q.id}}\')\n            h3 {{q.title}}\n            p {{q.description}}\n    //-\n       Adoption tab\n    tab(title=\'Adopt\', icon=\'icon ion-heart\')\n      content(has-header=\'true\', has-tabs=\'true\')\n        .padding\n          h2 Answer a question today.\n        .list.list-inset\n          label.item.item-input\n            span.input-label Your name\n            input(type=\'text\')\n          label.item.item-input\n            span.input-label Your email\n            input(type=\'password\')\n          label.item.item-input\n            textarea(placeholder=\'Any more info?\')\n          button.button.button-positive.button-block Send\n    //-\n       Home tab\n    tab(title=\'About\', icon=\'icon ion-search\')\n      content(has-header=\'true\', has-tabs=\'true\', padding=\'true\')\n        h3 About this app\n        p\n          | This is a sample seed project for the Ionic Framework. Please change it to match your needs.\n';
+
+
+
+
+require.register("boot/template-summary.jade", function(exports, require, module){
+module.exports = '\nnav-page(title=\'title\', left-buttons=\'leftButtons\', right-buttons=\'rightButtons\')\n    content(has-header=\'true\', padding=\'true\')\n        .padding\n            h2 Summary\n';
 });
-require.register("boot/question.jade", function(exports, require, module){
-module.exports = 'nav-page(title=\'question.title\')\n    content(has-header=\'true\', padding=\'true\')\n        | {{ question.description }}\n';
+require.register("boot/template-list.jade", function(exports, require, module){
+module.exports = 'nav-page(title=\'title\')\n     content(has-header=\'true\', has-tabs=\'true\')\n        list\n            a.item.item-icon.left(ng-repeat=\'z in zones\', type=\'item-text-wrap\', href=\'#/detail/{{z.id}}\')\n                i.icon(data-ng-class=\'z.icon\')\n                |{{z.title}}\n\n                span.item-note {{z.description}}\n';
 });
-require("mm-ui/jade-runtime");
+require.register("boot/template-detail.jade", function(exports, require, module){
+module.exports = 'nav-page(title=\'zone.title\')\n    content(has-header=\'true\')\n        .padding\n            h2{{ zone.title }}\n            p {{ zone.description }}\n\n        ul.list\n            li.item.item-checkbox(ng-repeat=\'q in zone.questions\')\n                label.checkbox\n                    input(type=\'checkbox\')\n                |{{q.txt}}\n\n        .padding\n            label.item.item-input\n                textarea(placeholder=\'Any more info?\')\n\n          button.button.button-positive.button-block Send\n';
+});
+require("app-ui/jade-runtime");
 if (typeof exports == "object") {
-  module.exports = require("mm-ui");
+  module.exports = require("app-ui");
 } else if (typeof define == "function" && define.amd) {
-  define(function(){ return require("mm-ui"); });
+  define(function(){ return require("app-ui"); });
 } else {
-  this["mirrormonkey"] = require("mm-ui");
+  this["mirrormonkey"] = require("app-ui");
 }})();
